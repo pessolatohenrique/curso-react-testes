@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transacao component should render with snapshot 1`] = `
+<div
+  class="transacao-container"
+>
+  <p>
+    01/01/2021
+  </p>
+  <p>
+    saque
+  </p>
+  <p>
+    R$ 
+    500
+  </p>
+</div>
+`;
