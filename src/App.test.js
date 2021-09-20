@@ -1,7 +1,8 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App";
 import { calcularNovoSaldo } from "./App";
+import Conta from "./conta/Conta";
 
 describe("App component", () => {
   describe("When i'm in main screen", () => {
@@ -53,6 +54,34 @@ describe("App component", () => {
 
       const newBalance = calcularNovoSaldo(values, balance);
       expect(newBalance).toBe(1000);
+    });
+
+    it("should perform a deposit", () => {
+      render(<App />);
+      const balance = screen.getByText("R$ 1000");
+
+      fireEvent.click(screen.getByText("Depósito"));
+
+      fireEvent.change(screen.getByTestId("valor"), {
+        target: { value: 50 },
+      });
+
+      fireEvent.click(screen.getByTestId("submit"));
+      expect(balance).toHaveTextContent("R$ 1050");
+    });
+
+    it("should perform a wrest", () => {
+      render(<App />);
+      const balance = screen.getByText("R$ 1000");
+
+      fireEvent.click(screen.getByText("Saque"));
+
+      fireEvent.change(screen.getByTestId("valor"), {
+        target: { value: 50 },
+      });
+
+      fireEvent.click(screen.getByTestId("submit"));
+      expect(balance).toHaveTextContent("R$ 950");
     });
   });
 });
